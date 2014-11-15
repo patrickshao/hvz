@@ -51,7 +51,7 @@ class Human extends Entity{
   public void fire(){
     
     if (millis()-reloadTimer > reloadTime && numInClip>0) {
-      bulletAL.add(new Bullet(x,y,shotAngle, bulletSpeed));
+      bulletAL.add(new Bullet(x,y+h/2,shotAngle, bulletSpeed));
       numInClip--;
       //System.out.println(numInClip);
     }
