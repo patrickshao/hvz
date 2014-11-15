@@ -1,4 +1,7 @@
 class Block{
+  
+  float x,y,w,h;
+  
   Block(float x,float y,float w,float h) {
     this.x = x;
     this.y = y;

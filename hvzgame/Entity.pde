@@ -1,5 +1,5 @@
 class Entity{
-  float x,y,w,h;
+
   float dirAngle;
   int speed;
   int health = 1;

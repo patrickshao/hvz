@@ -20,7 +20,7 @@ class Bullet {
   }
   
   void drawBullet() {
-    color = color.Orange()
+    //color = color.Orange()
   }
   
   void moveBullet() {
