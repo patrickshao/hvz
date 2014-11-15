@@ -1,15 +1,14 @@
 class Human extends Entity{
   
   private PImage hPic;
-  float bulletSpeed = 10;
-  float shotAngle=0;
+  private float bulletSpeed = 10;
+  private float shotAngle=0;
   private int clipsize=6;
   private int numInClip=6;
   private float reloadTime=5;
   private ArrayList<Bullet> bulletAL;
   private int reloadingPause;
   private boolean reloading;
-  private boolean isDead;
   
   Human(float x, float y, float w, float h){
     super(x,y,w,h);
@@ -36,10 +35,6 @@ class Human extends Entity{
   
   public ArrayList<Bullet> getBullets(){
     return bulletAL;
-  }
-  
-  public void die(){
-    isDead=true;
   }
   
 }

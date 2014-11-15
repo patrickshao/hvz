@@ -1,12 +1,13 @@
 class Entity{
 
-  float dirAngle;
-  int speed;
-  int health = 1;
-  float x;
-  float y;
-  float w;
-  float h;
+  protected float dirAngle;
+  protected int speed;
+  protected int health = 1;
+  protected float x;
+  protected float y;
+  protected float w;
+  protected float h;
+  protected boolean isDead=false;
   
   Entity(float x, float y, float w, float h){
     this.x=x;
@@ -44,5 +45,8 @@ class Entity{
     if (health >0){
       health--;
     }
+  }
+  public void die(){
+    isDead=true;
   }
 }
