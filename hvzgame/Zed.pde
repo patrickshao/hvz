@@ -10,17 +10,27 @@ class Zed extends Entity{
       zPic.resize(int (w),int (h));
       theHum =hum;
   }
-    public boolean overlaps(Entity e) {
-     return (e.getX()-e.getW()/2 < x+w/2 && e.getX()+e.getW()/2 > x-w/2 && e.getY()-e.getH()/2 < y+h/2 && e.getY()+e.getH()/2 > y-h/2);
-    }
-    
+  
     public void move(){
+      faceHuman();
       x+=cos(radians(dirAngle))*speed;
       y+=sin(radians(dirAngle))*speed;
-      overlaps(theHum);
-  }
+      if (overlaps(theHum)) {
+        theHum.damage();
+      };
+    }
   
-  public void faceHuman() {
+    public void faceHuman() {
      this.setDir(degrees(atan2(theHum.getY()-this.getY(),theHum.getX()-this.getX())));
   }
+  
+    public void gotHit() {
+      Arraylist<Bullets> bList = theHum.getBullets();
+      for (int i = 0; i < bList.length(); i++) {
+        if (overlaps(blist.get(i))) {
+          theZed.damage();
+          break;
+        }
+      }
+    }
 }
