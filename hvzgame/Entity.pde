@@ -18,8 +18,13 @@ class Entity{
   }
   
   public void move(){
-    x+=cos(radians(dirAngle))*speed;
-    y+=sin(radians(dirAngle))*speed;
+    
+    for(Block block:blocks){
+      if(!overlaps(block)){
+        x+=cos(radians(dirAngle))*speed;
+        y+=sin(radians(dirAngle))*speed;
+      }
+    }
   }
   
   public void setDir(float angleInDegrees){
@@ -54,5 +59,8 @@ class Entity{
   }
   public boolean overlaps(Bullet b) {
      return (b.getX() < x+w/2 && b.getX() > x-w/2 && b.getY() < y+h/2 && b.getY() > y-h/2);
+  }
+  public boolean overlaps(Block b){
+    return (b.getX()-b.getW()/2 < x+w/2 && b.getX()+b.getW()/2 > x-w/2 && b.getY()-b.getH()/2 < y+h/2 && b.getY()+b.getH()/2 > y-h/2);
   }
 }

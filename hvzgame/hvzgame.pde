@@ -3,6 +3,7 @@ int xScreen = 800;
 int yScreen = 600;
 int ammoLimit = 6;
 float mouseAngle;
+ArrayList<Block> blocks;
 Human player;
 final float PLAYERHEIGHT = 86.0;
 final float PLAYERWIDTH = 34.0;

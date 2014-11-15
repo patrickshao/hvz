@@ -13,8 +13,7 @@ class Zed extends Entity{
   
     public void move(){
       faceHuman();
-      x+=cos(radians(dirAngle))*speed;
-      y+=sin(radians(dirAngle))*speed;
+      super.move();
       if (super.overlaps((Entity)theHum)) {
         theHum.damage();
       };
