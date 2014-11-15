@@ -40,4 +40,9 @@ class Entity{
   public boolean isDead(){
     return (health==0);
   }
+  public void damage(){
+    if (health >0){
+      health--;
+    }
+  }
 }
