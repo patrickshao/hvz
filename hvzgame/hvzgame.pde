@@ -1,11 +1,17 @@
+//Modifiable Numbers and Values!
 int xScreen = 800;
 int yScreen = 600;
+int ammoLimit = 6;
+
+//Don't change these.
 PImage bgImage;
+Bullet[] ammo;
 
 color crossHairC = color(150);
 
 void setup() {
   size(xScreen,yScreen);
+  ammo = new Bullet[6];
   noCursor();
 }
 void draw() {
