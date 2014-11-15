@@ -37,4 +37,7 @@ class Entity{
   public float getH(){
     return h;
   }
+  public boolean isDead(){
+    return (health==0);
+  }
 }
