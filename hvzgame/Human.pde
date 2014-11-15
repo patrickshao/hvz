@@ -29,17 +29,19 @@ class Human extends Entity{
   public void drawHuman(){
     updateHuman();
     image (hPic,x,y);
-    println(shotAngle);
-    float c = sin(radians(shotAngle));
-    translate(x,y+h/2);
-    rotate(c);
-    if (abs(shotAngle)>90){
-      scale(-1.0,1.0);
-      c=-c;
+    float xOffset = 0;
+    int inv = 1;
+    if (abs(shotAngle) > 90) {
+      inv = -1;
+      xOffset = w/2;
     }
-      image (gunPic,0,0);
+    float c = inv*sin(radians(shotAngle));
+    translate(x+xOffset,y+h/2);
+    rotate(c);
+    scale(1.0*inv,1.0);
+    image (gunPic,0,0);
     rotate(-c);
-    translate(-x,-y-h/2);
+    translate(-x-xOffset,-y-h/2);
   }
   
   public void fire(){
