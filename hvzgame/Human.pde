@@ -7,19 +7,20 @@ class Human extends Entity{
   private float reloadTime=5;
   private ArrayList<Bullet> ammoAL;
   private int reloadingPause;
+  private boolean reloading;
   
   Human(float x, float y, float w, float h){
     super(x,y,w,h);
     speed = 10;
-    pic = loadImage("REPLACE");
-    pic.resize(int (w),int (h));
+    hPic = loadImage("REPLACE");
+    hPic.resize(int (w),int (h));
   }
   
   public boolean overlaps(Entity e){
   }
   
   public void fire(){
-    //check if reloading
+    //set reloading to false
     //update array list
     //create new bullet from shotAngle, x, y
     //update clip
@@ -27,6 +28,8 @@ class Human extends Entity{
   
   public void reload(){
     //start pause timer
+    //let timer finish
+    //set reloading to true
     //start adding bullets, with pause
   }
   
