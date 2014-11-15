@@ -1,6 +1,6 @@
 class Bullet {
   
-  int range = 150;
+  int range = 300;
   
   //(x,y) coordinates, may change to a point
   float startX, startY;
@@ -17,7 +17,7 @@ class Bullet {
     this.startY = y;
     this.x = x;
     this.y = y;
-    this.a = a;
+    this.a = a+random(-15,15);
     this.s = s;
   }
   
