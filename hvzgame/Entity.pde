@@ -1,12 +1,13 @@
 class Entity{
 
-  float dirAngle;
-  int speed;
-  int health = 1;
-  float x;
-  float y;
-  float w;
-  float h;
+  protected float dirAngle;
+  protected int speed;
+  protected int health = 1;
+  protected float x;
+  protected float y;
+  protected float w;
+  protected float h;
+  protected boolean isDead=false;
   
   Entity(float x, float y, float w, float h){
     this.x=x;
@@ -39,5 +40,19 @@ class Entity{
   }
   public boolean isDead(){
     return (health==0);
+  }
+  public void damage(){
+    if (health >0){
+      health--;
+    }
+  }
+  public void die(){
+    isDead=true;
+  }
+  public boolean overlaps(Entity e) {
+     return (e.getX()-e.getW()/2 < x+w/2 && e.getX()+e.getW()/2 > x-w/2 && e.getY()-e.getH()/2 < y+h/2 && e.getY()+e.getH()/2 > y-h/2);
+  }
+  public boolean overlaps(Bullet b) {
+     return (b.getX() < x+w/2 && b.getX() > x-w/2 && b.getY() < y+h/2 && b.getY() > y-h/2);
   }
 }

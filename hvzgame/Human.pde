@@ -1,13 +1,15 @@
 class Human extends Entity{
   
   private PImage hPic;
-  float shotAngle=0;
+  private float bulletSpeed = 10;
+  private float shotAngle=0;
   private int clipsize=6;
   private int numInClip=6;
   private float reloadTime=5;
-  private ArrayList<Bullet> ammoAL;
+  private ArrayList<Bullet> bulletAL;
   private int reloadingPause;
   private boolean reloading;
+  private int reloadTimer;
   
   Human(float x, float y, float w, float h){
     super(x,y,w,h);
@@ -16,12 +18,10 @@ class Human extends Entity{
     hPic.resize(int (w),int (h));
   }
   
-  public boolean overlaps(Entity e){
-    return false;
-  }
-  
   public void fire(){
-    //set reloading to false
+    reloading = false;
+    bulletAL.add(new Bullet(x,y,shotAngle, bulletSpeed));
+    numInClip--;
     //update array list
     //create new bullet from shotAngle, x, y
     //update clip
@@ -34,7 +34,8 @@ class Human extends Entity{
     //start adding bullets, with pause
   }
   
-  
-
+  public ArrayList<Bullet> getBullets(){
+    return bulletAL;
+  }
   
 }
