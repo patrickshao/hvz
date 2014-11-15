@@ -8,16 +8,24 @@ Human player;
 ArrayList<Zed> zList;
 final float PLAYERHEIGHT = 86.0;
 final float PLAYERWIDTH = 34.0;
-int numzeds = 50;
+int numzeds = 5;
+float speed = 2;
 
 //Don't change these.
 PImage bgImage;
 ArrayList<Bullet> ammo;
+float mapDisW;
+float mapDisH;
+float disX = 0;
+float disY = 0;
 
 color crossHairC = color(150);
 
 void setup() {
   bgImage = loadImage("theMap.png");
+  mapDisW = -bgImage.width/2;
+  mapDisH = -bgImage.height/2;
+  
   rectMode(CENTER);
   size(xScreen,yScreen);
   blocks = new ArrayList<Block>();
@@ -32,7 +40,16 @@ void setup() {
   }
 }
 void draw() {
-  image(bgImage,-bgImage.width/2,-bgImage.height/2);
+  background(0);
+  println(mapDisW+disX+","+bgImage.width);
+  if (mapDisW+disX >= -bgImage.width+xScreen/2 && mapDisW+disX <= bgImage.width+xScreen/2) {
+    mapDisW +=disX;
+  }
+  if (mapDisH+disY >= -bgImage.height/2 && mapDisH+disY <= bgImage.height-bgImage.height/2) {
+    mapDisH+=disY;
+  }
+  
+  image(bgImage,mapDisW,mapDisH);
   mouseAngle = degrees(atan2(mouseY-height/2, mouseX-width/2));
   drawCrosshair();
   drawBullets();
@@ -46,6 +63,7 @@ void drawZed(){
       zList.remove(i);
     }
     else{
+      z.displaceZed(disX,disY);
       z.gotHit();
       z.drawZed();
     }
@@ -94,19 +112,22 @@ void mousePressed() {
     player.fire();
   }
 }
-void keyPressed(){
+void keyTyped(){
   if (key=='r'){player.reload();}
   if (key=='w'){
-    translate(100,10);
-    player.setDir(-90);
+    disX = 0;
+    disY = speed;
   }
   if (key=='a'){
-    player.setDir(180);
+    disX = speed;
+    disY = 0;
   }
   if (key=='s'){
-    player.setDir(90);
+    disX = 0;
+    disY = -speed;
   }
   if (key=='d'){
-    player.setDir(0);
+    disX = -speed;
+    disY = 0;
   }
 }
