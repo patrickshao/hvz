@@ -1,24 +1,27 @@
-import java.util.*;
 //Modifiable Numbers and Values!
 int xScreen = 800;
 int yScreen = 600;
 int ammoLimit = 6;
+float mouseAngle;
 
 //Don't change these.
 PImage bgImage;
-Bullet[] ammo;
+ArrayList<Bullet> ammo;
 
 color crossHairC = color(150);
 
 void setup() {
+  rectMode(CENTER);
   size(xScreen,yScreen);
-  ammo = new Bullet[6];
+  ammo = new ArrayList<Bullet>();
   noCursor();
+  mouseAngle = 0;
 }
 void draw() {
   background(0,100,0);
-  
+  mouseAngle = atan((mouseY-yScreen) / (mouseX-xScreen));
   drawCrosshair();
+  drawBullets();
 }
 
 void drawCrosshair() {
@@ -33,10 +36,21 @@ void drawCrosshair() {
   line(mouseX,mouseY+7,mouseX,mouseY+13);
 }
 
+void drawBullets() {
+  for (int i = ammo.size()-1; i >= 0; i--) {
+    Bullet b = ammo.get(i);
+    b.moveBullet();
+    b.drawBullet();
+  }
+}
+
 void mouseReleased() {
   crossHairC = color(150);
 }
 
 void mousePressed() {
   crossHairC = color(255,0,0);
+  if (ammo.size() < ammoLimit) {
+    ammo.add(new Bullet(xScreen/2,yScreen/2,mouseAngle,1));
+  }
 }
