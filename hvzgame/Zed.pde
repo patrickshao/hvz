@@ -5,7 +5,7 @@ class Zed extends Entity{
   
     Zed(float x, float y, float w, float h, Human hum){
       super(x,y,w,h);     
-      speed = 2.1;
+      speed = 1.2;
       zPic = loadImage("zombie3.png"); //REPLACE
       zPic.resize(int (w),int (h));
       theHum =hum;

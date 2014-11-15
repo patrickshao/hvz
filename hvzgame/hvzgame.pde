@@ -1,6 +1,6 @@
 //Modifiable Numbers and Values!
-int xScreen = 800;
-int yScreen = 600;
+int xScreen = 1000;
+int yScreen = 750;
 int ammoLimit = 6;
 float mouseAngle;
 ArrayList<Block> blocks;
@@ -9,7 +9,7 @@ ArrayList<Zed> zList;
 final float PLAYERHEIGHT = 86.0;
 final float PLAYERWIDTH = 34.0;
 int numzeds = 5;
-float speed = 2;
+float speed = 1;
 
 //Don't change these.
 PImage bgImage;
@@ -22,6 +22,7 @@ float disY = 0;
 color crossHairC = color(150);
 
 void setup() {
+  textAlign(CENTER,CENTER);
   bgImage = loadImage("theMap.png");
   mapDisW = -bgImage.width/2;
   mapDisH = -bgImage.height/2;
@@ -34,10 +35,35 @@ void setup() {
   zList = new ArrayList<Zed>();
   player=new Human(xScreen/2-PLAYERWIDTH/2,yScreen/2-PLAYERHEIGHT/2,PLAYERWIDTH,PLAYERHEIGHT);
   for (int i=0;i<numzeds;i++){
-    float zx = random(0,1)*xScreen;
-    float zy = random(0,1)*yScreen;
-    zList.add(new Zed(zx,zy,PLAYERWIDTH,PLAYERHEIGHT,player));
+    addZombie();
   }
+}
+void addZombie(){
+  float pickside = random(0,1);
+    float zx, zy;
+    if (pickside<.25){
+      //left
+      zy = yScreen*random(0,1);
+      zx = -PLAYERWIDTH;
+    }
+    else if (pickside<.50){
+      //right
+      zy=yScreen*random(0,1);
+      zx=xScreen+PLAYERWIDTH;
+    }
+    else if (pickside<.75){
+      //top
+      zx=xScreen*random(0,1);
+      zy=-PLAYERHEIGHT;
+    }
+    else{
+      //bottom
+      zx=xScreen*random(0,1);
+      zy=yScreen+PLAYERHEIGHT;
+    }
+//    float zx = random(0,1)*xScreen;
+//    float zy = random(0,1)*yScreen;
+    zList.add(new Zed(zx,zy,PLAYERWIDTH,PLAYERHEIGHT,player));
 }
 void draw() {
   background(0);
@@ -54,8 +80,17 @@ void draw() {
   drawBullets();
   drawPlayer();
   drawZed();
+  if (player.isDead()) {
+    background(0);
+    textSize(50);
+    fill(255,0,0);
+    text("GAME OVER",xScreen/2,yScreen/4);
+    text("Press \"N\" to restart", xScreen/2, yScreen/2);
+    noLoop();
+  }
 }
 void drawZed(){
+  
   for (int i=zList.size()-1; i>=0; i--){
     Zed z = zList.get(i);
     if(z.isDead()){
@@ -66,6 +101,9 @@ void drawZed(){
       z.gotHit();
       z.drawZed();
     }
+  }
+  if (zList.size()<numzeds){
+    addZombie();
   }
 }
 
@@ -128,5 +166,9 @@ void keyTyped(){
   if (key=='d'){
     disX = -speed;
     disY = 0;
+  }
+  if (key=='n'){
+    setup();
+    loop();
   }
 }
