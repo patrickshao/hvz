@@ -3,6 +3,10 @@ class Entity{
   float dirAngle;
   int speed;
   int health = 1;
+  float x;
+  float y;
+  float w;
+  float h;
   
   Entity(float x, float y, float w, float h){
     this.x=x;
