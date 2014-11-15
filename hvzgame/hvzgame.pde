@@ -41,11 +41,10 @@ void setup() {
 }
 void draw() {
   background(0);
-  println(mapDisW+disX+","+bgImage.width);
-  if (mapDisW+disX >= -bgImage.width+xScreen/2 && mapDisW+disX <= bgImage.width+xScreen/2) {
+  if (mapDisW+disX >= -bgImage.width+xScreen/2 && mapDisW+disX <= xScreen/2) {
     mapDisW +=disX;
   }
-  if (mapDisH+disY >= -bgImage.height/2 && mapDisH+disY <= bgImage.height-bgImage.height/2) {
+  if (mapDisH+disY >= -bgImage.height+yScreen/2 && mapDisH+disY <= yScreen/2) {
     mapDisH+=disY;
   }
   
