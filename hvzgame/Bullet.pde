@@ -21,7 +21,12 @@ class Bullet {
     this.s = s;
   }
   
-  void setMovement() {
+  float getX() {
+    return x;
+  }
+  
+  float getY() {
+    return y;
   }
   
   void drawBullet() {
