@@ -19,7 +19,7 @@ void setup() {
 }
 void draw() {
   background(0,100,0);
-  mouseAngle = atan((mouseY-yScreen) / (mouseX-xScreen));
+  mouseAngle = degrees(atan2(mouseY-height/2, mouseX-width/2));
   drawCrosshair();
   drawBullets();
 }
@@ -41,6 +41,9 @@ void drawBullets() {
     Bullet b = ammo.get(i);
     b.moveBullet();
     b.drawBullet();
+    if (b.outOfRange()) {
+      ammo.remove(i);
+    }
   }
 }
 
@@ -51,6 +54,6 @@ void mouseReleased() {
 void mousePressed() {
   crossHairC = color(255,0,0);
   if (ammo.size() < ammoLimit) {
-    ammo.add(new Bullet(xScreen/2,yScreen/2,mouseAngle,1));
+    ammo.add(new Bullet(xScreen/2,yScreen/2,mouseAngle,5));
   }
 }
