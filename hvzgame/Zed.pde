@@ -43,6 +43,7 @@ class Zed extends Entity{
           damage();
           bList.remove(i);
           image(death,x,y);
+          killCount++;
           break;
         }
       }

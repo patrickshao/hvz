@@ -2,22 +2,26 @@
 int xScreen = 1000;
 int yScreen = 750;
 int ammoLimit = 6;
-float mouseAngle;
-ArrayList<Block> blocks;
-Human player;
-ArrayList<Zed> zList;
 final float PLAYERHEIGHT = 86.0;
 final float PLAYERWIDTH = 34.0;
 int numzeds = 5;
 float speed = 1;
 
 //Don't change these.
+float mouseAngle;
+
+ArrayList<Block> blocks;
+Human player;
+ArrayList<Zed> zList;
+
 PImage bgImage;
 ArrayList<Bullet> ammo;
 float mapDisW;
 float mapDisH;
 float disX = 0;
 float disY = 0;
+
+int killCount = 0;
 
 color crossHairC = color(150);
 
@@ -80,6 +84,10 @@ void draw() {
   drawBullets();
   drawPlayer();
   drawZed();
+  textSize(20);
+  fill(0,0,255);
+  text("Kills: " + killCount,xScreen/2,10);
+  
   if (player.isDead()) {
     background(0);
     textSize(50);
