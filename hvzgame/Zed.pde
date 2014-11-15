@@ -2,12 +2,15 @@ class Zed extends Entity{
   
     private PImage zPic;
     private Human theHum; 
+    private PImage death;
   
     Zed(float x, float y, float w, float h, Human hum){
       super(x,y,w,h);     
       speed = 1.2;
       zPic = loadImage("zombie3.png"); //REPLACE
       zPic.resize(int (w),int (h));
+      death = loadImage("comicPow.png");
+      death.resize(int (h), int (h));
       theHum =hum;
   }
     
@@ -39,6 +42,7 @@ class Zed extends Entity{
         if (overlaps(bList.get(i))) {
           damage();
           bList.remove(i);
+          image(death,x,y);
           break;
         }
       }
