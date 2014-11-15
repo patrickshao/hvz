@@ -1,3 +1,4 @@
+import java.util.*;
 //Modifiable Numbers and Values!
 int xScreen = 800;
 int yScreen = 600;
