@@ -17,6 +17,7 @@ class Human extends Entity{
   }
   
   public boolean overlaps(Entity e){
+    return false;
   }
   
   public void fire(){
