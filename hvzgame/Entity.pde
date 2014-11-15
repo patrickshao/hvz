@@ -49,4 +49,10 @@ class Entity{
   public void die(){
     isDead=true;
   }
+  public boolean overlaps(Entity e) {
+     return (e.getX()-e.getW()/2 < x+w/2 && e.getX()+e.getW()/2 > x-w/2 && e.getY()-e.getH()/2 < y+h/2 && e.getY()+e.getH()/2 > y-h/2);
+  }
+  public boolean overlaps(Bullet b) {
+     return (b.getX() < x+w/2 && b.getX() > x-w/2 && b.getY() < y+h/2 && b.getY() > y-h/2);
+  }
 }

@@ -9,6 +9,7 @@ class Human extends Entity{
   private ArrayList<Bullet> bulletAL;
   private int reloadingPause;
   private boolean reloading;
+  private int reloadTimer;
   
   Human(float x, float y, float w, float h){
     super(x,y,w,h);
