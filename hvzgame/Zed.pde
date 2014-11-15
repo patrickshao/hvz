@@ -25,10 +25,10 @@ class Zed extends Entity{
   }
   
     public void gotHit() {
-      Arraylist<Bullets> bList = theHum.getBullets();
-      for (int i = 0; i < bList.length(); i++) {
+      ArrayList<Bullet> bList = theHum.getBullets();
+      for (int i = 0; i < bList.size(); i++) {
         if (overlaps(bList.get(i))) {
-          theZed.damage();
+          damage();
           break;
         }
       }
