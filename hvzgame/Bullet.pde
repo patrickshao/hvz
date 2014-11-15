@@ -1,5 +1,7 @@
 class Bullet {
   
+  int range = 20;
+  
   //(x,y) coordinates, may change to a point
   float x,y;
 
@@ -20,12 +22,11 @@ class Bullet {
   }
   
   void drawBullet() {
-    //color = color.Orange()
   }
-  
+
   void moveBullet() {
-    int dx = cos(radians(a))*s;
-    int dy = sin(radians(a))*s;
+    float dx = cos(radians(a))*s;
+    float dy = sin(radians(a))*s;
     this.x += dx;
     this.y += dx;
   }
