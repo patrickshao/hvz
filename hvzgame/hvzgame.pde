@@ -3,6 +3,9 @@ int xScreen = 800;
 int yScreen = 600;
 int ammoLimit = 6;
 float mouseAngle;
+Human player;
+final float PLAYERHEIGHT = 86.0;
+final float PLAYERWIDTH = 34.0;
 
 //Don't change these.
 PImage bgImage;
@@ -16,12 +19,19 @@ void setup() {
   ammo = new ArrayList<Bullet>();
   noCursor();
   mouseAngle = 0;
+  player=new Human(xScreen/2-PLAYERWIDTH/2,yScreen/2-PLAYERHEIGHT/2,PLAYERWIDTH,PLAYERHEIGHT);
 }
 void draw() {
   background(0,100,0);
   mouseAngle = degrees(atan2(mouseY-height/2, mouseX-width/2));
   drawCrosshair();
   drawBullets();
+  drawPlayer();
+}
+
+void drawPlayer(){
+  //player.move();
+  player.drawHuman();
 }
 
 void drawCrosshair() {

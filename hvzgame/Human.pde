@@ -1,6 +1,7 @@
 class Human extends Entity{
   
   private PImage hPic;
+  private PImage gunPic;
   private float bulletSpeed = 10;
   private float shotAngle=0;
   private int clipsize=6;
@@ -14,8 +15,31 @@ class Human extends Entity{
   Human(float x, float y, float w, float h){
     super(x,y,w,h);
     speed = 10;
-    hPic = loadImage("REPLACE");
+    hPic = loadImage("Feldblum human.png");
     hPic.resize(int (w),int (h));
+    gunPic = loadImage("nerf gun.png");
+    gunPic.resize(gunPic.width/2,gunPic.height/2);
+  }
+  
+  public void updateHuman(){
+    shotAngle=mouseAngle;
+
+  }
+  
+  public void drawHuman(){
+    updateHuman();
+    image (hPic,x,y);
+    println(shotAngle);
+    float c = sin(radians(shotAngle));
+    translate(x,y+h/2);
+    rotate(c);
+    if (abs(shotAngle)>90){
+      scale(-1.0,1.0);
+      c=-c;
+    }
+      image (gunPic,0,0);
+    rotate(-c);
+    translate(-x,-y-h/2);
   }
   
   public void fire(){
