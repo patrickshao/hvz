@@ -4,13 +4,13 @@ class Human extends Entity{
   private PImage gunPic;
   private float bulletSpeed = 10;
   private float shotAngle=0;
-  private int clipsize=6;
+  final int CLIPSIZE=6;
   private int numInClip=6;
-  private float reloadTime=5;
+  private int reloadTime=4000;
   private ArrayList<Bullet> bulletAL;
   private int reloadingPause;
-  private boolean reloading;
   private int reloadTimer;
+  private boolean reloading;
   
   Human(float x, float y, float w, float h){
     super(x,y,w,h);
@@ -19,6 +19,8 @@ class Human extends Entity{
     hPic.resize(int (w),int (h));
     gunPic = loadImage("nerf gun.png");
     gunPic.resize(gunPic.width/2,gunPic.height/2);
+    bulletAL=new ArrayList<Bullet>();
+    reloadTimer=-4000;
   }
   
   public void updateHuman(){
@@ -45,9 +47,13 @@ class Human extends Entity{
   }
   
   public void fire(){
-    reloading = false;
-    bulletAL.add(new Bullet(x,y,shotAngle, bulletSpeed));
-    numInClip--;
+    
+    if (millis()-reloadTimer > reloadTime && numInClip>0) {
+      bulletAL.add(new Bullet(x,y,shotAngle, bulletSpeed));
+      numInClip--;
+      //System.out.println(numInClip);
+    }
+
     //update array list
     //create new bullet from shotAngle, x, y
     //update clip
@@ -55,13 +61,17 @@ class Human extends Entity{
   
   public void reload(){
     //start pause timer
+    reloadTimer = millis();
+    numInClip=6;
     //let timer finish
     //set reloading to true
     //start adding bullets, with pause
+      
   }
   
   public ArrayList<Bullet> getBullets(){
     return bulletAL;
   }
+  public void setBullets(ArrayList<Bullet> b){bulletAL=b;}  
   
 }

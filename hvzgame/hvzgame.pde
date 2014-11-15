@@ -48,12 +48,14 @@ void drawCrosshair() {
 }
 
 void drawBullets() {
-  for (int i = ammo.size()-1; i >= 0; i--) {
-    Bullet b = ammo.get(i);
+  ammo = player.getBullets();
+  for (int i=ammo.size()-1;i>=0;i--) {
+    Bullet b=ammo.get(i);
     b.moveBullet();
     b.drawBullet();
     if (b.outOfRange()) {
       ammo.remove(i);
+      player.setBullets(ammo);
     }
   }
 }
@@ -64,7 +66,16 @@ void mouseReleased() {
 
 void mousePressed() {
   crossHairC = color(255,0,0);
-  if (ammo.size() < ammoLimit) {
-    ammo.add(new Bullet(xScreen/2,yScreen/2,mouseAngle,5));
+  ammo = player.getBullets();
+  if (ammo.size() < player.CLIPSIZE) {
+    //ammo.add(new Bullet(xScreen/2,yScreen/2,mouseAngle,5));
+    player.fire();
   }
+}
+void keyPressed(){
+  if (key=='r'){player.reload();}
+  if (key=='w'){player.setDir(-90);}
+  if (key=='a'){player.setDir(180);}
+  if (key=='s'){player.setDir(90);}
+  if (key=='d'){player.setDir(0);}
 }
