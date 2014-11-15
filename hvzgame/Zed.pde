@@ -5,11 +5,16 @@ class Zed extends Entity{
   
     Zed(float x, float y, float w, float h, Human hum){
       super(x,y,w,h);     
-      speed = 10;
-      zPic = loadImage("Feldblum basic.png"); //REPLACE
+      speed = 0.4;
+      zPic = loadImage("zombie3.png"); //REPLACE
       zPic.resize(int (w),int (h));
       theHum =hum;
   }
+    
+    public void drawZed(){
+      move();
+      image (zPic,x,y);
+    }
   
     public void move(){
       faceHuman();
@@ -20,16 +25,18 @@ class Zed extends Entity{
     }
   
     public void faceHuman() {
-     this.setDir(degrees(atan2(theHum.getY()-this.getY(),theHum.getX()-this.getX())));
+     setDir(degrees(atan2(theHum.getY()-this.getY(),theHum.getX()-this.getX())));
   }
   
     public void gotHit() {
       ArrayList<Bullet> bList = theHum.getBullets();
-      for (int i = 0; i < bList.size(); i++) {
+      for (int i = bList.size()-1; i >= 0; i--) {
         if (overlaps(bList.get(i))) {
           damage();
+          bList.remove(i);
           break;
         }
       }
     }
+    
 }

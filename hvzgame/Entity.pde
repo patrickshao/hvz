@@ -1,7 +1,7 @@
 class Entity{
 
   protected float dirAngle;
-  protected int speed;
+  protected float speed;
   protected int health = 1;
   protected float x;
   protected float y;
@@ -18,13 +18,17 @@ class Entity{
   }
   
   public void move(){
-    
+    boolean canMove = true;
     for(Block block:blocks){
-      if(!overlaps(block)){
+      if(overlaps(block)){
+        canMove = false;
+      }
+      
+    }
+    if (canMove){
         x+=cos(radians(dirAngle))*speed;
         y+=sin(radians(dirAngle))*speed;
       }
-    }
   }
   
   public void setDir(float angleInDegrees){
@@ -50,6 +54,10 @@ class Entity{
     if (health >0){
       health--;
     }
+    if (health <=0){
+      die();
+    }
+    
   }
   public void die(){
     isDead=true;

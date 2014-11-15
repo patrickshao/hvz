@@ -5,8 +5,8 @@ class Human extends Entity{
   private float bulletSpeed = 10;
   private float shotAngle=0;
   final int CLIPSIZE=6;
-  private int numInClip=6;
-  private int reloadTime=4000;
+  private int numInClip=CLIPSIZE;
+  private int reloadTime=3000;
   private ArrayList<Bullet> bulletAL;
   private int reloadingPause;
   private int reloadTimer;
@@ -20,7 +20,7 @@ class Human extends Entity{
     gunPic = loadImage("nerf gun.png");
     gunPic.resize(gunPic.width/2,gunPic.height/2);
     bulletAL=new ArrayList<Bullet>();
-    reloadTimer=-4000;
+    reloadTimer=-1*reloadTime;
   }
   
   public void updateHuman(){
@@ -37,6 +37,7 @@ class Human extends Entity{
       inv = -1;
       xOffset = w/2;
     }
+    pushMatrix();
     float c = inv*sin(radians(shotAngle));
     translate(x+xOffset,y+h/2);
     rotate(c);
@@ -44,6 +45,7 @@ class Human extends Entity{
     image (gunPic,0,0);
     rotate(-c);
     translate(-x-xOffset,-y-h/2);
+    popMatrix();
   }
   
   public void fire(){
@@ -62,7 +64,7 @@ class Human extends Entity{
   public void reload(){
     //start pause timer
     reloadTimer = millis();
-    numInClip=6;
+    numInClip=CLIPSIZE;
     //let timer finish
     //set reloading to true
     //start adding bullets, with pause
