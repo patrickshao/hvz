@@ -15,7 +15,7 @@ class Zed extends Entity{
       faceHuman();
       x+=cos(radians(dirAngle))*speed;
       y+=sin(radians(dirAngle))*speed;
-      if (overlaps(theHum)) {
+      if (super.overlaps((Entity)theHum)) {
         theHum.damage();
       };
     }
@@ -27,7 +27,7 @@ class Zed extends Entity{
     public void gotHit() {
       Arraylist<Bullets> bList = theHum.getBullets();
       for (int i = 0; i < bList.length(); i++) {
-        if (overlaps(blist.get(i))) {
+        if (overlaps(bList.get(i))) {
           theZed.damage();
           break;
         }
