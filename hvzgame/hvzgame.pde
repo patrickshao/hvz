@@ -18,14 +18,17 @@ PImage bgImage;
 ArrayList<Bullet> ammo;
 float mapDisW;
 float mapDisH;
-float disX = 0;
-float disY = 0;
+float disX;
+float disY;
 
-int killCount = 0;
+int killCount;
 
 color crossHairC = color(150);
 
 void setup() {
+  disX = 0;
+  disY = 0;
+  killCount = 0;
   textAlign(CENTER,CENTER);
   bgImage = loadImage("theMap.png");
   mapDisW = -bgImage.width/2;
